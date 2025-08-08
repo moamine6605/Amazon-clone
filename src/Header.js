@@ -1,5 +1,6 @@
 import React from 'react'
 import './Header.css'
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
@@ -7,10 +8,12 @@ import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
 function Header() {
   return (
     <div className='header'>
-        <img 
-        alt='amazon-logo'
-        className='header__logo'
-        src='http://pngimg.com/uploads/amazon/amazon_PNG11.png' />
+        <Link to="/">
+            <img 
+                alt='amazon-logo'
+                className='header__logo'
+                src='http://pngimg.com/uploads/amazon/amazon_PNG11.png' />
+        </Link>
 
         <div className='header__search'>
             <input className='header__searchInput' type='text' />
@@ -39,13 +42,14 @@ function Header() {
                 <span className='header__optionLineTwo'>Prime</span>
                 
             </div>
+            <Link to="/checkout">
+                <div className='header__optionBasket'>
 
-            <div className='header__optionBasket'>
-
-                <FontAwesomeIcon icon={faShoppingBasket} />
-                <span className='header__optionLineTwo header__basketCount'>0</span>
-                
-            </div>
+                    <FontAwesomeIcon icon={faShoppingBasket} />
+                    <span className='header__optionLineTwo header__basketCount'>0</span>
+                    
+                </div>
+            </Link>
 
         </div>
     </div>
