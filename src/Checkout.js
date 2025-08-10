@@ -6,7 +6,6 @@ function Checkout() {
 
 
 
-
   return (
     <div className='checkout'>
         <div className='checkout__left'>
@@ -25,7 +24,7 @@ function Checkout() {
         </div>
 
         <div className='checkout__right'>
-            <Subtotal />
+            <Subtotal/>
         </div>
     </div>
   )

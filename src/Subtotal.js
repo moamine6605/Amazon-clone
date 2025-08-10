@@ -1,21 +1,27 @@
 import React from 'react'
 import CurrencyInput from "react-currency-input-field";
 import './Subtotal.css'
+import { useStateValue } from './StateProvider'
+
 
 
 function Subtotal() {
+
+      const [ {basket}, dispatch] = useStateValue();
+
   return (
     <div className='subtotal'>
         <p>
-        Subtotal (0 items):{" "}
+        Subtotal ({basket.length} items):{" "}
         <strong>
           <CurrencyInput
-            value={0}
+            value={basket.reduce((total, item)=> total + item.price, 0)}
             decimalsLimit={2}
             groupSeparator=","
             prefix="$"
             readOnly
             disableGroupSeparators={false}
+            className="currency-input"
           />
         </strong>
       </p>

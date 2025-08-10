@@ -2,13 +2,30 @@ import React from 'react'
 import './Product.css'
 import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useStateValue } from './StateProvider'
 
 const starStyle = {
     color: '#FFD700'
 }
 
-function Product({title, image, price, rating, currency}) {
-  return (
+function Product({id, title, image, price, rating, currency}) {
+    const [basket, dispatch] = useStateValue();
+
+
+
+    function addtobasket(){
+        dispatch({
+            type: 'ADD_TO_BASKET',
+            item: {
+                id:id,
+                title: title,
+                image: image,
+                price: price,
+                rating: rating,
+            }
+        })
+    }
+    return (
     <div className='product'>
         <div className='product__info'>
             <p>{title}</p>
@@ -23,7 +40,7 @@ function Product({title, image, price, rating, currency}) {
         
         <img src={image} alt='' />
 
-        <button>
+        <button onClick={addtobasket}>
             Add to Cart
         </button>
     </div>

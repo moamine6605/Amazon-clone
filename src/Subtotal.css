@@ -29,3 +29,18 @@
     border-color: rgb(255, 216, 20) rgb(255, 216, 20) rgb(255, 216, 20);
     color: #111;
 }
+
+.currency-input {
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  background: transparent;
+  outline: none;
+  color: #111;
+  width: 100px;
+}
+
+.currency-input:disabled {
+  background-color: transparent;
+  color: #111;
+}

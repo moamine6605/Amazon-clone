@@ -4,8 +4,14 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
+import { useStateValue } from './StateProvider';
 
 function Header() {
+
+    const [state, dispatch] = useStateValue()
+
+
+
   return (
     <div className='header'>
         <Link to="/">
@@ -46,7 +52,7 @@ function Header() {
                 <div className='header__optionBasket'>
 
                     <FontAwesomeIcon icon={faShoppingBasket} />
-                    <span className='header__optionLineTwo header__basketCount'>0</span>
+                    <span className='header__optionLineTwo header__basketCount'>{state.basket?.length}</span>
                     
                 </div>
             </Link>
