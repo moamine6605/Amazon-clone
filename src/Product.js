@@ -4,14 +4,12 @@ import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useStateValue } from './StateProvider'
 
-const starStyle = {
+export const starStyle = {
     color: '#FFD700'
 }
 
 function Product({id, title, image, price, rating, currency}) {
-    const [basket, dispatch] = useStateValue();
-
-
+    const [state, dispatch] = useStateValue();
 
     function addtobasket(){
         dispatch({

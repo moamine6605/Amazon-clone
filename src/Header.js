@@ -8,7 +8,7 @@ import { useStateValue } from './StateProvider';
 
 function Header() {
 
-    const [state, dispatch] = useStateValue()
+    const [state] = useStateValue()
 
 
 
@@ -28,12 +28,15 @@ function Header() {
 
         <div className='header__nav'>
 
-            <div className='header__option'>
+            
+            <Link to='/login'>
+                <div className='header__option'>
 
-                <span className='header__optionLineOne'>hello Guest</span>
-                <span className='header__optionLineTwo'>Sign in</span>
+                    <span className='header__optionLineOne'>hello Guest</span>
+                    <span className='header__optionLineTwo'>Sign in</span>
 
-            </div>
+                </div>
+            </Link>
 
             <div className='header__option'>
 
