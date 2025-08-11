@@ -2,26 +2,33 @@ import './App.css';
 import Header from './Header';
 import Home from './Home';
 import Checkout from './Checkout';
-
-import { BrowserRouter, Route, Routes} from 'react-router-dom'
 import Login from './Login';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+
+function AppContent() {
+  const location = useLocation();
+
+  return (
+    <div className="App">
+      {/* Only show Header if not on /login */}
+      {location.pathname !== '/login' && <Header />}
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/checkout" element={<Checkout />} />
+      </Routes>
+    </div>
+  );
+}
 
 function App() {
-    return (
-        <BrowserRouter>
-            <div className="App">
-                <Routes>
-                    <Route path='/login' element={<Login />} />                        
-                </Routes>
-                <Header/>
-                <Routes>
-                    <Route path='/' element={<Home/>} />
-                    <Route path='/checkout' element={<Checkout />} />
-                </Routes>
-            </div>
-        </BrowserRouter>
-
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 
 export default App;
+
