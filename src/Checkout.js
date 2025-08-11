@@ -8,13 +8,15 @@ import CurrencyInput from "react-currency-input-field";
 
 function Checkout() {
 
-    const [{basket}] = useStateValue()
+    const [{basket, user}] = useStateValue();
+    console.log(user)
 
   return (
     <div className='checkout'>
         <div className='checkout__left'>
 
             <div>
+                {user && <h2>Hi, {user?.email}</h2> }
                 <h2 className='checkout__title'>Shopping Cart</h2>
 
                 {basket.map((item,index) => {
