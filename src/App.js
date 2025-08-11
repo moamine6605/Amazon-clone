@@ -4,6 +4,10 @@ import Home from './Home';
 import Checkout from './Checkout';
 import Login from './Login';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { auth } from './firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useStateValue } from './StateProvider';
 
 function AppContent() {
   const location = useLocation();
@@ -23,6 +27,29 @@ function AppContent() {
 }
 
 function App() {
+
+    const [{}, dispatch] = useStateValue()
+
+    useEffect(()=>{
+        onAuthStateChanged(auth, authUser =>{
+            console.log('the user is >>> ', authUser);
+
+            if(authUser){
+                dispatch({
+                    type: 'SET_USER',
+                    user: authUser
+                })
+            } else {
+                dispatch({
+                    type: 'SET_USER',
+                    user: null
+                })
+            }
+        })
+        
+    }, [])
+
+
   return (
     <BrowserRouter>
       <AppContent />

@@ -8,7 +8,7 @@ import CurrencyInput from "react-currency-input-field";
 
 function Checkout() {
 
-    const [{basket}, dispatch] = useStateValue()
+    const [{basket}] = useStateValue()
 
   return (
     <div className='checkout'>
