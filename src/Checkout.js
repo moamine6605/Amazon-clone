@@ -38,9 +38,11 @@ function Checkout() {
                 Subtotal ({basket.length} items):{" "}
                 <strong>
                     <CurrencyInput
+                    name={'total'}
                     value={basket.reduce((total, item)=> total + item.price, 0)}
                     decimalsLimit={2}
-                    groupSeparator=","
+                    groupSeparator=','
+                    decimalSeparator="."
                     prefix="$"
                     readOnly
                     disableGroupSeparators={false}
