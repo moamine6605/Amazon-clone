@@ -27,11 +27,10 @@ function AppContent() {
 
 function App() {
 
-    const [{}, dispatch] = useStateValue()
+    const [, dispatch] = useStateValue()
 
     useEffect(()=>{
         onAuthStateChanged(auth, authUser =>{
-            console.log('the user is >>> ', authUser);
 
             if(authUser){
                 dispatch({
@@ -46,7 +45,7 @@ function App() {
             }
         })
         
-    }, [])
+    }, [dispatch])
 
 
   return (

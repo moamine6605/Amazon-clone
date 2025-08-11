@@ -9,7 +9,7 @@ export const starStyle = {
 }
 
 function Product({id, title, image, price, rating, currency}) {
-    const [state, dispatch] = useStateValue();
+    const [, dispatch] = useStateValue();
 
     function addtobasket(){
         dispatch({

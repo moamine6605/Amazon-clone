@@ -8,7 +8,7 @@ import { useStateValue } from './StateProvider'
 
 function CheckoutProduct({id, image, title, price, rating}) {
 
-    const [{basket}, dispatch] = useStateValue();
+    const [, dispatch] = useStateValue();
 
     function removeFromBasket(){
         dispatch({
@@ -20,7 +20,7 @@ function CheckoutProduct({id, image, title, price, rating}) {
   return (
     <div className='CheckoutProduct'>
         <div>
-            <img className='checkoutProduct__image' src={image} />
+            <img className='checkoutProduct__image' src={image} alt='' />
         </div>
 
         <div className='checkoutProduct__info'>
