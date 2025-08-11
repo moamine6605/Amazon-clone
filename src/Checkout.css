@@ -1,36 +1,46 @@
 .checkout {
+    display: -webkit-box; /* Older Safari/Chrome */
+    display: -webkit-flex; /* Older Safari 6.1+ */
     display: flex;
+    -webkit-flex-direction: row;
     flex-direction: row;
     gap: 20px;
     padding: 20px;
     padding-left: 100px;
     padding-right: 50px;
     background-color: rgb(234, 237, 237);
+    height: -webkit-max-content; /* Older WebKit syntax */
     height: max-content;
 }
 
-.checkout__left{
+.checkout__left {
     background-color: white;
+    -webkit-box-flex: 1; /* Older syntax */
+    -webkit-flex: 1;
     flex: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+    -webkit-flex-direction: column;
     flex-direction: column;
 }
 
-.checkout__right{
+.checkout__right {
     margin-right: 30px;
 }
 
-.checkout__title{
+.checkout__title {
     margin-right: 15px;
     padding: 10px;
     border-bottom: 1px solid lightgray;
 }
 
-.checkout-subtotal{
+.checkout-subtotal {
     display: block;
     padding: 10px 20px;
     margin-bottom: 10px;
     margin-top: 2px;
     padding-top: 2px;
+    -webkit-align-self: flex-end;
     align-self: flex-end;
 }
