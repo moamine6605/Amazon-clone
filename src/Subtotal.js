@@ -15,8 +15,10 @@ function Subtotal() {
         Subtotal ({basket.length} items):{" "}
         <strong>
           <CurrencyInput
+            name="total"
             value={basket.reduce((total, item)=> total + item.price, 0)}
             decimalsLimit={2}
+            decimalSeparator="."
             groupSeparator=","
             prefix="$"
             readOnly
@@ -26,7 +28,7 @@ function Subtotal() {
         </strong>
       </p>
       <small className="subtotal__gift">
-        <input type="checkbox" /> This order contains a gift
+        <input name="gift" type="checkbox" /> This order contains a gift
       </small>
 
         <button>Proceed to checkout</button>
