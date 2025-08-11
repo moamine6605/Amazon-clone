@@ -28,6 +28,7 @@
     margin-top: 10px;
     border-color: rgb(255, 216, 20) rgb(255, 216, 20) rgb(255, 216, 20);
     color: #111;
+    cursor: pointer;
 }
 
 .currency-input {

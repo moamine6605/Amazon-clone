@@ -3,9 +3,19 @@ import './CheckoutProduct.css'
 import { starStyle } from './Product'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons'
+import { useStateValue } from './StateProvider'
 
 
 function CheckoutProduct({id, image, title, price, rating}) {
+
+    const [{basket}, dispatch] = useStateValue();
+
+    function removeFromBasket(){
+        dispatch({
+            type:'DELETE',
+            id:id,
+        })
+    }
 
   return (
     <div className='CheckoutProduct'>
@@ -25,7 +35,7 @@ function CheckoutProduct({id, image, title, price, rating}) {
                 {Array(rating).fill(<FontAwesomeIcon icon={solidStar} />).map((item, index)=><p key={index} style={starStyle}>{item}</p>)}
             </div>
 
-            <button>Delete</button>
+            <button onClick={removeFromBasket}>Delete</button>
 
         </div>
 
