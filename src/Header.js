@@ -7,6 +7,7 @@ import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
 import { useStateValue } from './StateProvider';
 import { signOut } from 'firebase/auth';
 import { auth } from './firebase'
+import logo from './images/amazon-logo-white.png'
 
 function Header() {
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ function Header() {
             <img 
                 alt='amazon-logo'
                 className='header__logo'
-                src='http://pngimg.com/uploads/amazon/amazon_PNG11.png' />
+                src={logo} />
         </Link>
 
         <div className='header__search'>
