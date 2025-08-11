@@ -14,7 +14,6 @@ function AppContent() {
 
   return (
     <div className="App">
-      {/* Only show Header if not on /login */}
       {location.pathname !== '/login' && <Header />}
 
       <Routes>

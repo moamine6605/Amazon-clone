@@ -9,7 +9,6 @@ import CurrencyInput from "react-currency-input-field";
 function Checkout() {
 
     const [{basket, user}] = useStateValue();
-    console.log(user)
 
   return (
     <div className='checkout'>
