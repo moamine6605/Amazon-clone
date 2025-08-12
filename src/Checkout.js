@@ -40,7 +40,7 @@ function Checkout() {
                     <CurrencyInput
                     name="total"
                     value={basket.reduce((total, item)=> total + item.price, 0)}
-                    decimalsLimit={2}
+                    decimalScale={2}
                     groupSeparator=","
                     decimalSeparator="."
                     prefix="$"
