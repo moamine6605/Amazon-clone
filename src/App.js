@@ -4,6 +4,7 @@ import Home from './Home';
 import Checkout from './Checkout';
 import Login from './Login';
 import Payment from './Payment';
+import Orders from './Orders';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { auth } from './firebase';
@@ -22,6 +23,7 @@ function AppContent() {
       {location.pathname !== '/login' && <Header />}
 
       <Routes>
+        <Route path='/orders' element={<Orders />} />
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/checkout" element={<Checkout />} />

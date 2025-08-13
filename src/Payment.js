@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Payment.css'
 import { useStateValue } from './StateProvider'
 import CheckoutProduct from './CheckoutProduct';
@@ -6,10 +6,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import CurrencyInput from "react-currency-input-field";
 import axios from './axios';
+import { db } from './firebase';
+import { collection, doc, setDoc } from "firebase/firestore";
+
 
 function Payment() {
 
-    const [{basket, user}] = useStateValue();
+    const [{basket, user}, dispatch] = useStateValue();
     const navigate = useNavigate();
 
     const stripe = useStripe();
@@ -21,36 +24,59 @@ function Payment() {
     const [ disabled, setDisable] = useState(true);
     const [ clientSecret, setClientSecret] = useState(true);
 
-    useEffect(()=>{
-        const getClientSecret = async () => {
-            const response = await axios({
-                method: 'post',
-                url: `/payments/create?total=${basket.reduce((total, item)=> total + item.price, 0) * 100}`
-            })
-            setClientSecret(response.data.clientSecret)
+    useEffect(() => {
+    const getClientSecret = async () => {
+        try {
+        const response = await axios.post(
+            `/payments/create?total=${basket.reduce((total, item) => total + item.price, 0) * 100}`
+        );
+        setClientSecret(response.data.clientSecret);
+        } catch (error) {
+        console.error("Error fetching client secret:", error);
         }
+    };
 
+    if (basket.length > 0) {
         getClientSecret();
-    }, [basket])
+    }
+    }, [basket]);
 
     console.log(clientSecret)
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setProcessing(true);
+    e.preventDefault();
+    setProcessing(true);
 
-        const payload = await stripe.confirmCardPayment(clientSecret, {
-            payment_method:{
-                card: elements.getElement(CardElement)
-            }
-        }).then(({paymentIntent})=>{
-            setSucceeded(true);
-            setError(null);
-            setProcessing(false);
+    const { paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+        card: elements.getElement(CardElement),
+        },
+    });
 
-            navigate('/orders', {replace:true})
-        })
+    if (!user) {
+        console.error("No user signed in. Cannot save order.");
+        return;
     }
+
+    // Save order to Firestore
+    await setDoc(
+        doc(collection(db, "users", user?.uid, "orders"), paymentIntent.id),
+        {
+        basket: basket,
+        amount: paymentIntent.amount,
+        created: paymentIntent.created,
+        },
+        { merge: true }
+    );
+
+    // Continue with order flow
+    setSucceeded(true);
+    setError(null);
+    setProcessing(false);
+
+    dispatch({ type: "EMPTY_BASKET" });
+    navigate("/orders", { replace: true });
+    };
 
     const handleChange = event => {
         setDisable(event.empty);

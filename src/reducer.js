@@ -11,6 +11,13 @@ function reducer(state, action){
                 ...state,
                 basket: [...state.basket, action.item],
     })
+
+        case 'EMPTY_BASKET':
+            return({
+                ...state,
+                basket: []
+            })
+
         case 'DELETE':
             return ({
                 ...state,
