@@ -24,17 +24,14 @@ function Payment() {
     const [ disabled, setDisable] = useState(true);
     const [ clientSecret, setClientSecret] = useState(true);
 
-    useEffect(() => {
-    const getClientSecret = async () => {
-        try {
-        const response = await axios.post(
-            `/payments/create?total=${basket.reduce((total, item) => total + item.price, 0) * 100}`
-        );
-        setClientSecret(response.data.clientSecret);
-        } catch (error) {
-        console.error("Error fetching client secret:", error);
+    useEffect(()=>{
+        const getClientSecret = async () => {
+            const response = await axios({
+                method: 'post',
+                url: `/payments/create?total=${basket.reduce((total, item)=> total + item.price, 0) * 100}`
+            })
+            setClientSecret(response.data.clientSecret)
         }
-    };
 
     if (basket.length > 0) {
         getClientSecret();
@@ -65,8 +62,7 @@ function Payment() {
         basket: basket,
         amount: paymentIntent.amount,
         created: paymentIntent.created,
-        },
-        { merge: true }
+        }
     );
 
     // Continue with order flow
