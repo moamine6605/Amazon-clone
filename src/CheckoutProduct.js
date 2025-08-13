@@ -6,7 +6,7 @@ import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons'
 import { useStateValue } from './StateProvider'
 
 
-function CheckoutProduct({id, image, title, price, rating}) {
+function CheckoutProduct({id, image, title, price, rating, hideButton}) {
 
     const [, dispatch] = useStateValue();
 
@@ -35,7 +35,8 @@ function CheckoutProduct({id, image, title, price, rating}) {
                 {Array(rating).fill(<FontAwesomeIcon icon={solidStar} />).map((item, index)=><p key={index} style={starStyle}>{item}</p>)}
             </div>
 
-            <button onClick={removeFromBasket}>Delete</button>
+            {!hideButton &&
+            <button onClick={removeFromBasket}>Delete</button>}
 
         </div>
 

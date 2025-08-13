@@ -32,3 +32,15 @@ h3 {
 .payment__address, .payment__items, .payment__details{
     flex: 0.8;
 }
+
+ .payment__details > form > div >button {
+    background: rgb(255, 216, 20);
+    border-radius: 15px;
+    width: 180px;
+    height: 30px;
+    border: 1px solid;
+    margin-top: 10px;
+    border-color: rgb(255, 216, 20) rgb(255, 216, 20) rgb(255, 216, 20);
+    color: #111;
+    cursor: pointer;
+ }
